@@ -1,0 +1,29 @@
+ext.deps = [
+    springBootVersion:'1.2.3.RELEASE'
+]
+
+allprojects {    
+    apply plugin: 'java'
+    apply plugin: 'eclipse'
+    version = '1.0'
+    sourceCompatibility = 1.8    
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {    
+		compile("org.springframework.boot:spring-boot-starter-jetty:"+deps.springBootVersion)
+	    compile("org.springframework.boot:spring-boot-starter-actuator:"+deps.springBootVersion)
+	    compile("org.springframework.boot:spring-boot-starter-web:"+deps.springBootVersion){
+	        exclude module: "spring-boot-starter-tomcat:"+deps.springBootVersion
+	    }
+	    compile("com.wordnik:swagger-jersey2-jaxrs:1.5.1-M2")
+	    compile("org.springframework.boot:spring-boot-starter-jersey:"+deps.springBootVersion)
+    } 
+}
+
+subprojects {
+    dependencies {    
+        testCompile("org.springframework.boot:spring-boot-starter-test:"+deps.springBootVersion)
+    }
+}
